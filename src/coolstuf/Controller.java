@@ -31,6 +31,16 @@ public class Controller {
         bindViewsToSelectedTeacher();
     }
 
+    public void closeDb() {
+        System.out.println("closing db stuff");
+        try {
+            queryClassnamesForTeach.close();
+            dbc.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void fillTeacherListview(List<Teacher> teachers) {
         teachersListView.getItems().addAll(teachers);
     }
@@ -82,6 +92,7 @@ public class Controller {
                 teachers.add(new Teacher(id, fn, ln, em));
             }
 
+            s.close();
             return teachers;
 
         } catch (SQLException e) {
